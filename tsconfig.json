@@ -1,6 +1,28 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2017",
+    "suppressImplicitAnyIndexErrors": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@assets/*": ["./assets/*"],
+      "@configs/*": ["./configs/*"],
+      "@constants/*": ["./constants/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@redux/*": ["./redux/*"],
+      "@components/*": ["./components/*"],
+      "@core/*": ["./core/*"],
+      "@screens/*": ["./screens/*"],
+      "@service/*": ["./service/*"],
+      "@utils/*": ["./utils/*"]
+    }
+  },
+  "compileOnSave": true
 }
