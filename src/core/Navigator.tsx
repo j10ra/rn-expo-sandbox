@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import AktivScreenSearch from '@screens/AktivScreenSearch';
 import AktivScreenDetails from '@screens/AktivScreenDetails';
 
@@ -16,6 +16,7 @@ export default function Navigator() {
           options={{
             title: 'Search',
             headerShown: false,
+            ...TransitionPresets.SlideFromRightIOS,
           }}
         />
         <Stack.Screen
@@ -23,6 +24,7 @@ export default function Navigator() {
           component={AktivScreenDetails}
           options={{
             title: 'Details',
+            ...TransitionPresets.SlideFromRightIOS,
           }}
         />
       </Stack.Navigator>

@@ -1,9 +1,5 @@
 import React from 'react';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { Badge, Box, HStack, Icon, Input, Skeleton, Spinner, Text, VStack } from 'native-base';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Animated, Dimensions } from 'react-native';
-
+import { Box, HStack, Skeleton } from 'native-base';
 interface IAktivUiSkelSearch {
   type: 'initial' | 'loading';
 }
@@ -13,7 +9,7 @@ export default function AktivUiSkelSearch({ type }: IAktivUiSkelSearch) {
     loading: 60,
   };
   return (
-    <Box px={3} pb={3} mb={2} position="relative">
+    <Box px={3} pb={3} mb={2} mx={1} position="relative">
       <Skeleton
         h={heightVal[type]}
         borderRadius={8}
@@ -23,7 +19,7 @@ export default function AktivUiSkelSearch({ type }: IAktivUiSkelSearch) {
       <HStack position={'absolute'} bottom="6" left="6">
         <Skeleton
           h="5"
-          width={20}
+          width={10}
           borderRadius={8}
           endColor="blueGray.600"
           startColor="blueGray.300"

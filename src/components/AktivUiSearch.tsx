@@ -17,7 +17,7 @@ export default function AktivUiSearch({ clampedScroll, loading, onChangeText }: 
   });
   const styles = useStyles(searchBarTranslate);
   const icons = {
-    left: <Icon m="2" ml="3" size="6" color="gray.400" as={<MaterialIcons name="search" />} />,
+    left: <Icon m="2" ml="3" size="6" color="gray.400" name="search" as={MaterialIcons} />,
     right: <Box px="3">{loading && <Spinner color="emerald.500" />}</Box>,
   };
 

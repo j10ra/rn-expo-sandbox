@@ -1,8 +1,16 @@
 import React from 'react';
 import { fetchItems, IPayload, IUseSearch } from '@utils/fetch';
 import { FETCH } from '@constants/types';
+import { cacheImages } from '@utils/cacheImages';
 
-export function useSearch({ query, pageSize = 10 }: IUseSearch) {
+interface IState {
+  hits: any[];
+  total: number;
+  pageIndex: number;
+  errors: IPayload;
+}
+export function useSearch({ pageSize = 10 }: any) {
+  const [query, setQuery] = React.useState('');
   const [shouldFetch, setShouldFetch] = React.useState(true);
   const [status, setStatus] = React.useState(FETCH.LOADING);
   const [state, setState] = React.useState({
@@ -10,17 +18,21 @@ export function useSearch({ query, pageSize = 10 }: IUseSearch) {
     total: 0,
     pageIndex: 1,
     errors: {},
-  } as any);
+  } as unknown as IState);
   const update = (stateUpdate: any) => {
-    setState({
+    setState((state: any) => ({
       ...state,
       ...stateUpdate,
-    });
+    }));
   };
   const successHandler = (response: IPayload) => {
     const { payload } = response;
     const { hits, total } = payload;
     let data = hits;
+
+    // let caching run in background
+    cacheImages(hits.map((image: any) => image.largeImageURL));
+    cacheImages(hits.map((image: any) => image.previewURL));
 
     state.pageIndex > 1 && (data = state.hits.concat(data));
     setShouldFetch(false);
@@ -33,12 +45,12 @@ export function useSearch({ query, pageSize = 10 }: IUseSearch) {
   };
   const fetchMore = React.useCallback(() => setShouldFetch(true), []);
   const resetItems = React.useCallback(() => {
-    setShouldFetch(true);
     update({
       pageIndex: 1,
       hits: [],
       total: 0,
     });
+    setShouldFetch(true);
   }, []);
 
   /**
@@ -50,8 +62,8 @@ export function useSearch({ query, pageSize = 10 }: IUseSearch) {
       setStatus(FETCH.LOADING);
       const response = await fetchItems({ query, pageSize, index: state.pageIndex });
 
-      response.hasError ? update({ errors: response }) : successHandler(response);
       setStatus(FETCH.IDLE);
+      response.hasError ? update({ errors: response }) : successHandler(response);
     };
 
     if (shouldFetch) bootstapFetch();
@@ -65,5 +77,6 @@ export function useSearch({ query, pageSize = 10 }: IUseSearch) {
     status,
     fetchMore,
     resetItems,
+    setQuery,
   };
 }

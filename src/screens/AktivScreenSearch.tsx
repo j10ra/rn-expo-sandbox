@@ -5,9 +5,13 @@ import AktivUiSearchFooter from '@components/AktivUiSearchFooter';
 import { AspectRatio, Box, Center, Image } from 'native-base';
 import { Animated, TouchableOpacity } from 'react-native';
 import { useSearch } from '@hooks/useSearch';
+import { useDispatch } from 'react-redux';
+import { setImageDetails } from '@core/store';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { deBouncer } from '@utils/deBouncer';
 
-export default function AktivScreenSearch() {
-  const [query, setQuery] = React.useState('');
+export default function AktivScreenSearch({ navigation }: CompositeScreenProps<any, any>) {
+  const dispatch = useDispatch();
   const [scrollYValue] = React.useState(new Animated.Value(0));
   const interpolation = Animated.add(
     scrollYValue.interpolate({
@@ -18,15 +22,21 @@ export default function AktivScreenSearch() {
     new Animated.Value(0)
   );
   const clampedScroll = Animated.diffClamp(interpolation, 0, 50);
-  const { items, total, fetchMore, currentPage, status, resetItems } = useSearch({
-    query: query,
+  const { items, total, fetchMore, currentPage, status, resetItems, setQuery } = useSearch({
     pageSize: 20,
   });
+  const imageTapHandler = (image: any) =>
+    deBouncer(() => {
+      dispatch(setImageDetails(image));
+      navigation.push('AktivScreenDetails', {
+        uri: image.previewURL,
+      });
+    });
   const renderItem = ({ item }: any) => {
     return (
       <Center>
         <Box mx={3.5} mb={2} position="relative" maxW={460}>
-          <TouchableOpacity onPress={() => console.log('hello')}>
+          <TouchableOpacity onPress={() => imageTapHandler(item)}>
             <AspectRatio w="100%" ratio={16 / 9}>
               <Image
                 resizeMode="cover"
