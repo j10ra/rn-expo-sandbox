@@ -9,6 +9,7 @@ const Stack = createStackNavigator();
 export default function Navigator() {
   return (
     <NavigationContainer>
+      {/* @ts-ignore: @types/react -v 18.0.1 */}
       <Stack.Navigator>
         <Stack.Screen
           name="AktivScreenSearch"
