@@ -23,3 +23,8 @@ expo init my-app --template @native-base/expo-template-typescript
 - Or scan from your device the generated QR code
 
 ## Run the project via react-native
+
+Build the project locally and run the app on actual device
+
+- `yarn android` for android
+- `yarn ios` for ios device
