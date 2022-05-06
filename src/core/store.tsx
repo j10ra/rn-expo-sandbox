@@ -19,10 +19,17 @@ export const slice = createSlice({
   },
 });
 
-export const { setImageDetails } = slice.actions;
-export const getImageData = ({ aktiv }: IAktivReducer) => aktiv.imageDetails;
+/**
+ * Aktiv Store
+ */
 export const store = configureStore({
   reducer: {
     aktiv: slice.reducer,
   },
 });
+
+/**
+ * Actions and Selectors
+ */
+export const { setImageDetails } = slice.actions;
+export const getImageData = ({ aktiv }: IAktivReducer) => aktiv.imageDetails;

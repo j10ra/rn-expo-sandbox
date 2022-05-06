@@ -2,18 +2,6 @@ import React from 'react';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Badge, HStack, Icon, Text } from 'native-base';
 
-const badgeProps = {
-  alignSelf: 'flex-start',
-  mr: '1',
-  bg: '#fff',
-  _text: {
-    color: '#000',
-    fontWeight: 'bold',
-  },
-  variant: 'subtle',
-  rounded: 'full',
-};
-
 export default function AktivUiBadge({ item }: any) {
   const { likes, downloads } = item;
 
@@ -40,3 +28,15 @@ export default function AktivUiBadge({ item }: any) {
     </HStack>
   );
 }
+
+const badgeProps = {
+  alignSelf: 'flex-start',
+  mr: '1',
+  bg: '#fff',
+  _text: {
+    color: '#000',
+    fontWeight: 'bold',
+  },
+  variant: 'subtle',
+  rounded: 'full',
+};

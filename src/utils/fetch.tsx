@@ -13,6 +13,11 @@ export interface IUseSearch {
   index?: number;
 }
 
+/**
+ * Simple fetch function
+ * @param {IUseSearch} Query params
+ * @returns a promise of fetched data
+ */
 export const fetchItems = async ({ query, pageSize, index = 1 }: IUseSearch): Promise<IPayload> => {
   try {
     const searchString = encodeURIComponent(query);

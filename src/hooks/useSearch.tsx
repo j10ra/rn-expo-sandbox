@@ -39,8 +39,9 @@ export function useSearch({ pageSize = 10 }: any) {
     update({
       hits: data,
       total,
+
+      // set for next fetch
       pageIndex: state.pageIndex + 1,
-      shouldFetch: false,
     });
   };
   const fetchMore = React.useCallback(() => setShouldFetch(true), []);

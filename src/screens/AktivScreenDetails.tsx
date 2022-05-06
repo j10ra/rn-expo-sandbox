@@ -1,9 +1,9 @@
 import React from 'react';
-import { AspectRatio, Badge, Box, Center, Heading, HStack, Image, Text, VStack } from 'native-base';
+import { ScrollView } from 'react-native';
+import { AspectRatio, Badge, Box, Heading, HStack, Image, Text } from 'native-base';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { getImageData } from '@core/store';
-import { ScrollView } from 'react-native';
 
 export default function AktivScreenDetails({ route }: CompositeScreenProps<any, any>) {
   const imageData = useSelector(getImageData);
